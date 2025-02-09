@@ -1,0 +1,15 @@
+/src/vendor
+/src/node_modules
+/src/.env
+/src/storage/*.key
+/src/public/storage
+/src/public/hot
+.docker
+dbdata
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,48 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kevent_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: kevent_nginx
+    restart: unless-stopped
+    ports:
+      - "8070:80"
+    volumes:
+      - ./src:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: kevent_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: kevent
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: kevent
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3376:3306"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  dbdata: 
