@@ -12,7 +12,6 @@ class EventFactory extends Factory
 
     public function definition(): array
     {
-        $this->faker->locale('ja_JP');
 
         $startTime = Carbon::instance($this->faker->dateTimeBetween('now', '+1 month'));
         $endTime = $startTime->copy()->addHours(2);
