@@ -6,11 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +21,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'login_id',
         'password',
+        'user_name',
+        'type_id',
+        'group_id',
     ];
 
     /**
@@ -44,5 +49,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'group_id');
     }
 }
