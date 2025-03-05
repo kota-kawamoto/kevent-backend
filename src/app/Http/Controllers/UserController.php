@@ -92,4 +92,21 @@ class UserController extends Controller
             return response()->json(['error' => 'Failed to update user'], 500);
         }
     }
+
+    /**
+     * 指定されたIDのユーザー情報を削除
+     *
+     * @param int $id ユーザーID
+     */
+    public function delete($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+        } catch (\Exception $e) {
+            Log::error('Error deleting user', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to delete user'], 500);
+        }
+    }
+
 }
