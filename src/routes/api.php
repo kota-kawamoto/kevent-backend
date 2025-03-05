@@ -13,3 +13,4 @@ Route::get('/user/{id}/edit', [UserController::class, 'show']);
 Route::delete('/user/{id}/delete', [UserController::class, 'delete']);
 Route::get('/groups', [UserController::class, 'getGroups']);
 Route::put('/user/{id}', [UserController::class, 'update']);
+Route::post('/user', [UserController::class, 'create']);

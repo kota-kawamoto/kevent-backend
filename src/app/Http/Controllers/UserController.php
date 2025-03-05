@@ -109,4 +109,21 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * ユーザー情報の作成
+     *
+     * @param Request $request
+     */
+    public function create(Request $request)
+    {
+        Log::info($request);
+        try {
+            $user = User::create($request->all());
+            return response()->json(['message' => 'User created successfully']);
+        } catch (\Exception $e) {
+            Log::error('Error creating user', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to create user'], 500);
+        }
+    }
+
 }
