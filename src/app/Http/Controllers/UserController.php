@@ -7,7 +7,6 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Validate;
 
 class UserController extends Controller
@@ -116,9 +115,8 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        Log::info($request);
         try {
-            $user = User::create($request->all());
+            User::create($request->all());
             return response()->json(['message' => 'User created successfully']);
         } catch (\Exception $e) {
             Log::error('Error creating user', ['error' => $e->getMessage()]);
