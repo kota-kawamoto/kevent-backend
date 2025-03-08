@@ -7,7 +7,9 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\Validate;
+use App\Http\Requests\UpdateUserRequet;
+use App\Http\Requests\CreateUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -72,10 +74,10 @@ class UserController extends Controller
     /**
      * ユーザー情報の更新
      *
-     * @param Validate $request
+     * @param UpdateUserRequet $request
      * @param int $id ユーザーID
      */
-    public function update(Validate $request, $id)
+    public function update(UpdateUserRequet $request, $id)
     {
         try {
             $user = User::findOrFail($id);
@@ -111,12 +113,18 @@ class UserController extends Controller
     /**
      * ユーザー情報の作成
      *
-     * @param Request $request
+     * @param CreateUserRequest $request
      */
-    public function create(Request $request)
+    public function create(CreateUserRequest $request)
     {
         try {
-            User::create($request->all());
+            User::create([
+                'user_name' => $request->user_name,
+                'login_id' => $request->login_id,
+                'password' => Hash::make($request->password),
+                'group_id' => $request->group_id,
+                'type_id' => $request->type_id,
+            ]);
             return response()->json(['message' => 'User created successfully']);
         } catch (\Exception $e) {
             Log::error('Error creating user', ['error' => $e->getMessage()]);
