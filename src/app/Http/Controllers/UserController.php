@@ -56,22 +56,6 @@ class UserController extends Controller
     }
 
     /**
-     * グループ情報を全て取得
-     *
-     * @return JsonResponse
-     */
-    public function getGroups(): JsonResponse
-    {
-        try {
-            $groups = Group::all();
-            return response()->json($groups);
-        } catch (\Exception $e) {
-            Log::error('Error', ['error' => $e->getMessage()]);
-            return response()->json(['error' => 'group not found'], 404);
-        }
-    }
-
-    /**
      * ユーザー情報の更新
      *
      * @param UpdateUserRequet $request
