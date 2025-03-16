@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('location')->nullable(false);
             $table->foreignId('group_id')
                 ->nullable(false)
-                ->constrained('groups', 'group_id');
+                ->constrained('groups', 'id');
             $table->text('detail')->nullable(false);
             $table->foreignId('register_user_id')
                 ->nullable(false)
-                ->constrained('users', 'user_id');
+                ->constrained('users', 'id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

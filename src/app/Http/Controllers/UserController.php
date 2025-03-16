@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
@@ -40,9 +39,9 @@ class UserController extends Controller
     public function show($id): JsonResponse
     {
         try {
-            $user = User::with('group')->where('user_id', $id)->firstOrFail();
+            $user = User::with('group')->where('id', $id)->firstOrFail();
             return response()->json([
-                'id' => $user->user_id,
+                'id' => $user->id,
                 'name' => $user->user_name,
                 'login_id' => $user->login_id,
                 'group_id' => $user->group_id,

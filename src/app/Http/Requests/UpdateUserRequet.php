@@ -17,8 +17,8 @@ class UpdateUserRequet extends FormRequest
     {
         return [
             'name' => 'required|string|max:18',
-            'login_id' => 'required|string|max:30|unique:users,login_id,' . $this->id . ',user_id',
-            'group_id' => 'required|exists:groups,group_id',
+            'login_id' => 'required|string|max:30|unique:users,login_id,' . $this->id . ',id',
+            'group_id' => 'required|exists:groups,id',
         ];
     }
 

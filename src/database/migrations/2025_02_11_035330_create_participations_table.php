@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->nullable(false)
-                ->constrained('users', 'user_id');
+                ->constrained('users', 'id');
             $table->foreignId('event_id')
                 ->nullable(false)
                 ->constrained('events', 'event_id');

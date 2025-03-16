@@ -13,7 +13,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +53,7 @@ class User extends Authenticatable
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'group_id', 'group_id');
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
+
 }

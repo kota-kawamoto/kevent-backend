@@ -18,7 +18,7 @@ class CreateUserRequest extends FormRequest
         return [
             'user_name' => 'required|string|max:18',
             'login_id' => 'required|string|max:30|unique:users,login_id',
-            'group_id' => 'required|exists:groups,group_id',
+            'group_id' => 'required|exists:groups,id',
             'password' => 'required|string|min:8',
             'type_id' => 'required|exists:user_types,id',
         ];
