@@ -23,7 +23,6 @@ services:
       - ./Docker/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - app_network
-
   db:
     image: mysql:8.0
     container_name: kevent_db
@@ -37,6 +36,15 @@ services:
       - dbdata:/var/lib/mysql
     ports:
       - "3376:3306"
+    networks:
+      - app_network
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: kevent_mailpit
+    ports:
+      - "9010:8025"
+      - "1025:1025"   
     networks:
       - app_network
 
