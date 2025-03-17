@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('app:sendEmails')->everyTenMinutes();
+        // ユーザ数集計
+        $schedule->command('app:sendEmails')->dailyAt('17:00');
     }
 }
