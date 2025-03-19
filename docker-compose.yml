@@ -47,6 +47,19 @@ services:
       - "1025:1025"   
     networks:
       - app_network
+  
+  scheduler:
+    build:
+      context: .
+      dockerfile: ./Docker/php/Dockerfile
+    container_name: kevent_scheduler
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    networks:
+      - app_network
+    command: php artisan schedule:work
 
 networks:
   app_network:
