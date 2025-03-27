@@ -10,7 +10,7 @@ class Event extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $primaryKey = 'event_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'title',

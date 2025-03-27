@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateUserRequet extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {

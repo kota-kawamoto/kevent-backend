@@ -11,11 +11,12 @@ return new class extends Migration
         Schema::create('participations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                ->nullable(false)
-                ->constrained('users', 'id');
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('set null');
             $table->foreignId('event_id')
                 ->nullable(false)
-                ->constrained('events', 'event_id');
+                ->constrained('events', 'id');
             $table->timestamps();
 
             $table->unique(['user_id', 'event_id']);
