@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->string('login_id')
                 ->unique()
                 ->nullable(false);
@@ -20,13 +20,18 @@ return new class extends Migration
                 ->constrained('user_types');
             $table->foreignId('group_id')
                 ->nullable(false)
-                ->constrained('groups', 'group_id');
+                ->constrained('groups');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['type_id']);
+            $table->dropForeign(['group_id']);
+        });
         Schema::dropIfExists('users');
     }
 };

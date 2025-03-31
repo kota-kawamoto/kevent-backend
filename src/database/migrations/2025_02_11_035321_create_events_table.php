@@ -9,19 +9,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id('event_id');
+            $table->id();
             $table->string('title')->nullable(false);
             $table->dateTime('start_time')->nullable(false);
             $table->dateTime('end_time')->nullable(false);
             $table->string('location')->nullable(false);
             $table->foreignId('group_id')
                 ->nullable(false)
-                ->constrained('groups', 'group_id');
+                ->constrained('groups', 'id');
             $table->text('detail')->nullable(false);
             $table->foreignId('register_user_id')
-                ->nullable(false)
-                ->constrained('users', 'user_id');
+                ->nullable()
+                ->constrained('users', 'id')
+                ->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

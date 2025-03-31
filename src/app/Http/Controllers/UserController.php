@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\UpdateUserRequet;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,9 +39,9 @@ class UserController extends Controller
     public function show($id): JsonResponse
     {
         try {
-            $user = User::with('group')->where('user_id', $id)->firstOrFail();
+            $user = User::with('group')->where('id', $id)->firstOrFail();
             return response()->json([
-                'id' => $user->user_id,
+                'id' => $user->id,
                 'name' => $user->user_name,
                 'login_id' => $user->login_id,
                 'group_id' => $user->group_id,
@@ -58,10 +57,10 @@ class UserController extends Controller
     /**
      * ユーザー情報の更新
      *
-     * @param UpdateUserRequet $request
+     * @param UpdateUserRequest $request
      * @param int $id ユーザーID
      */
-    public function update(UpdateUserRequet $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         try {
             $user = User::findOrFail($id);
@@ -88,6 +87,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             $user->delete();
+            return response()->json(['message' => 'User deleted successfully']);
         } catch (\Exception $e) {
             Log::error('Error deleting user', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'Failed to delete user'], 500);
