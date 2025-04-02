@@ -1,17 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Console\Commands;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
-class SendMailController extends Controller
+class DailyUserCount extends Command
 {
-    public function sendEmail(Request $request)
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'app:DailyUserCount';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = '日次でユーザ数の増減を集計しメールを配信する';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
     {
         try {
             $toAddress = 'krt34kk0@gmail.com';
@@ -28,9 +55,8 @@ class SendMailController extends Controller
 
             Mail::raw($mailBody, function ($message) use ($toAddress) {
                 $message->to($toAddress)
-                        ->subject('ユーザー数レポート - ' . Carbon::now()->format('Y/m/d'));
+                    ->subject('ユーザー数レポート - ' . Carbon::now()->format('Y/m/d'));
             });
-
         } catch (\Exception $e) {
             Log::error('メール送信に失敗しました：' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
