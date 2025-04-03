@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Carbon\Carbon;
@@ -59,7 +58,9 @@ class DailyUserCount extends Command
             });
         } catch (\Exception $e) {
             Log::error('メール送信に失敗しました：' . $e->getMessage());
-            return response()->json(['error' => $e->getMessage()], 500);
+            return self::FAILURE;
         }
+
+        return self::SUCCESS;
     }
 }
