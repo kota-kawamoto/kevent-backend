@@ -37,21 +37,33 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = User::where('login_id', $request->login_id)->first();
+        /**
+         * 認証ドライバ
+         * @var SessionGuard $auth
+         */
+        $auth = auth('web');
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        $credentials = [
+            'login_id' => $request->login_id,
+            'password' => $request->password
+        ];
+
+        // ID、パスワード判定
+        if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
                 'login_id' => ['ログインIDまたはパスワードが正しくありません。'],
             ]);
         }
 
-        // 既存のトークンを削除
-        $user->tokens()->delete();
+        $user = $auth->user();
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // セッションの生成
+        $request->session()->regenerate();
+
+        $request->session()->put('user', $user);
 
         return response()->json([
-            'token' => $token,
+            // 'token' => $token,
             'user' => [
                 'id' => $user->id,
                 'user_name' => $user->user_name,
