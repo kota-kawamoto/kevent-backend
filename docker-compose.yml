@@ -61,6 +61,15 @@ services:
       - app_network
     command: php artisan schedule:work
 
+  redis:
+    image: redis:alpine
+    container_name: kevent_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - app_network
+
 networks:
   app_network:
     driver: bridge

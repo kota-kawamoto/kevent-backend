@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
 # PHPの拡張機能のインストール
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Redis 拡張のインストール
+RUN pecl install redis && docker-php-ext-enable redis
+
 # Composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

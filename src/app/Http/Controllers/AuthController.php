@@ -36,9 +36,8 @@ class AuthController extends Controller
             'login_id' => 'required|string',
             'password' => 'required|string',
         ]);
-
-        // IDパスワード検証
-        if(!Auth::attempt($request->only('login_id', 'password'))) {
+        // IDパスワード検証（attemptだとセッション生成してくれる）
+        if (!Auth::attempt($request->only('login_id', 'password'))) {
             throw ValidationException::withMessages([
                 'login_id' => ['ログインIDまたはパスワードが正しくありません。'],
             ]);
@@ -46,8 +45,7 @@ class AuthController extends Controller
 
         // ログインユーザ取得
         $user = User::where('login_id', $request->login_id)->first();
-        // 既存のトークンを削除
-        $user->tokens()->delete();
+
         // トークン発行
         $token = $user->createToken('auth_token')->plainTextToken;
 
