@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,7 @@ class AuthController extends Controller
         }
 
         // ログインユーザ取得
-        $user = User::where('login_id', $request->login_id)->first();
+        $user = User::query()->where('login_id', $request->login_id)->first();
 
         // トークン発行
         $token = $user->createToken('auth_token')->plainTextToken;
