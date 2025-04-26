@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 // 認証不要のルート
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/csrf-cookie', [AuthController::class, 'getCsrfCookie']);
 
 // 認証が必要なルート

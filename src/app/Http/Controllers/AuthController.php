@@ -14,18 +14,6 @@ use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
     /**
-     * csrf-tokenを取得
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getCsrfToken(Request $request): JsonResponse
-    {
-        Log::info('csrf-token set');
-        return response()->json(['message' => 'csrf-token set']);
-    }
-
-    /**
      * ログイン処理
      *
      * @param Request $request
@@ -71,22 +59,5 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'ログアウトしました。']);
-    }
-
-    /**
-     * ログインユーザー情報の取得
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getLoginUserInfo(Request $request): JsonResponse
-    {
-        return response()->json([
-            'user' => [
-                'id' => $request->user()->id,
-                'user_name' => $request->user()->user_name,
-                'login_id' => $request->user()->login_id,
-            ]
-        ]);
     }
 }
