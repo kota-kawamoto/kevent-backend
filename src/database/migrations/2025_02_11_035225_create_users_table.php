@@ -14,13 +14,9 @@ return new class extends Migration
                 ->unique()
                 ->nullable(false);
             $table->string('password')->nullable(false);
-            $table->string('user_name')->nullable(false);
-            $table->foreignId('type_id')
-                ->nullable(false)
-                ->constrained('user_types');
-            $table->foreignId('group_id')
-                ->nullable(false)
-                ->constrained('groups');
+            $table->string('name')->nullable(false);
+            $table->string('type_id')->nullable(false);
+            $table->integer('group_id')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,10 +24,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['type_id']);
-            $table->dropForeign(['group_id']);
-        });
         Schema::dropIfExists('users');
     }
 };
