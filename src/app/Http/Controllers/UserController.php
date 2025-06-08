@@ -23,31 +23,6 @@ class UserController extends Controller
         try {
             $users = User::with('group')->paginate(5);
             return response()->json($users);
-
-        } catch (\Exception $e) {
-            Log::error('Error', ['error' => $e->getMessage()]);
-            return response()->json(['error' => 'user not found'], 404);
-        }
-    }
-
-    /**
-     * 指定されたIDのユーザー情報を取得
-     *
-     * @param int $id ユーザーID
-     * @return JsonResponse
-     */
-    public function show($id): JsonResponse
-    {
-        try {
-            $user = User::with('group')->where('id', $id)->firstOrFail();
-            return response()->json([
-                'id' => $user->id,
-                'name' => $user->user_name,
-                'login_id' => $user->login_id,
-                'group_id' => $user->group_id,
-                'group_name' => $user->group->group_name,
-            ]);
-
         } catch (\Exception $e) {
             Log::error('Error', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'user not found'], 404);
@@ -66,11 +41,10 @@ class UserController extends Controller
             $user = User::findOrFail($id);
 
             $user->update([
-                'user_name' => $request->name,
+                'name' => $request->name,
                 'login_id' => $request->login_id,
                 'group_id' => $request->group_id,
             ]);
-
         } catch (\Exception $e) {
             Log::error('Error updating user', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'Failed to update user'], 500);
@@ -103,7 +77,7 @@ class UserController extends Controller
     {
         try {
             User::create([
-                'user_name' => $request->user_name,
+                'name' => $request->name,
                 'login_id' => $request->login_id,
                 'password' => Hash::make($request->password),
                 'group_id' => $request->group_id,
@@ -115,5 +89,4 @@ class UserController extends Controller
             return response()->json(['error' => 'Failed to create user'], 500);
         }
     }
-
 }
