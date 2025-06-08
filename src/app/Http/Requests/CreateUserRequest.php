@@ -16,7 +16,7 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_name' => 'required|string|max:18',
+            'name' => 'required|string|max:18',
             'login_id' => 'required|string|max:30|unique:users,login_id',
             'group_id' => 'required|exists:groups,id',
             'password' => 'required|string|min:8',
@@ -27,8 +27,8 @@ class CreateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_name.required' => '名前は必須です',
-            'user_name.max' => '名前は18文字以内で入力してください',
+            'name.required' => '名前は必須です',
+            'name.max' => '名前は18文字以内で入力してください',
             'login_id.required' => 'ログインIDは必須です',
             'login_id.unique' => 'このログインIDは既に使用されています',
             'login_id.max' => 'ログインIDは30文字以内で入力してください',

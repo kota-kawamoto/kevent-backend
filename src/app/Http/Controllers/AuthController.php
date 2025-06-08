@@ -42,7 +42,7 @@ class AuthController extends Controller
             'token' => $token,
             'user' => [
                 'id' => $user->id,
-                'user_name' => $user->user_name,
+                'name' => $user->name,
                 'login_id' => $user->login_id,
             ]
         ]);
