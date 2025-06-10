@@ -14,9 +14,7 @@ return new class extends Migration
             $table->dateTime('start_time')->nullable(false);
             $table->dateTime('end_time')->nullable(false);
             $table->string('location')->nullable(false);
-            $table->foreignId('group_id')
-                ->nullable(false)
-                ->constrained('groups', 'id');
+            $table->string('group_id')->nullable(false);
             $table->text('detail')->nullable(false);
             $table->foreignId('register_user_id')
                 ->nullable()
