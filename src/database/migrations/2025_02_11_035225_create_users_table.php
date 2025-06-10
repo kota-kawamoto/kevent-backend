@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use packages\Domain\Models\Enums\UserRoleType;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
                 ->nullable(false);
             $table->string('password')->nullable(false);
             $table->string('name')->nullable(false);
-            $table->string('type_id')->nullable(false);
+            $table->enum('type_id', UserRoleType::values())->nullable(false);
             $table->integer('group_id')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
