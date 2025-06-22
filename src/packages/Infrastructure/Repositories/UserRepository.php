@@ -42,16 +42,16 @@ class UserRepository implements UserRepositoryInterface
             $builder->where('name', 'like', '%' . $params['name'] . '%');
         }
 
-        if (isset($params['email'])) {
-            $builder->where('email', 'like', '%' . $params['email'] . '%');
+        if (isset($params['login_id'])) {
+            $builder->where('login_id', 'like', '%' . $params['login_id'] . '%');
         }
 
         if (isset($params['role_type'])) {
-            $builder->where('role_type', $params['role_type']);
+            $builder->where('type_id', $params['role_type']);
         }
 
         /** @var LengthAwarePaginator */
-        $result = $builder->orderByDesc('id')->paginate(20, ['*'], 'page', $params['page'] ?? 1);
+        $result = $builder->orderByDesc('id')->paginate(10, ['*'], 'page', $params['page'] ?? 1);
 
         $collection = new Collection();
 
