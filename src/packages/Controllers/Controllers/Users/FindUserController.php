@@ -2,7 +2,6 @@
 
 namespace packages\Controllers\Controllers\Users;
 
-// use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\JsonResponse;
 use packages\Presenter\Resources\Users\FindUserResource;
 use packages\UseCase\Interfaces\Users\FindUserUseCaseInterface;
