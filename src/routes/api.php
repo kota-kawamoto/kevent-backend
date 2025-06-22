@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use packages\Controllers\Controllers\Users\FindUserController;
+use packages\Controllers\Controllers\Users\EditUserController;
 use Illuminate\Http\Request;
 
 // 認証不要のルート
@@ -20,12 +21,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     // ユーザ情報の取得
     Route::get('/users/{id}', FindUserController::class);
-    // ユーザ情報の編集
-    Route::get('/users/{id}/edit', [UserController::class, 'show']);
-    // ユーザー詳細
-    Route::get('/users/{id}', FindUserController::class);
-    // 編集
-    Route::get('/users/{id}/edit', FindUserController::class);
+    // ユーザー編集画面用データ取得
+    Route::get('/users/{id}/edit', EditUserController::class);
     // ユーザ情報の削除
     Route::delete('/users/{id}', [UserController::class, 'delete']);
     // グループ一覧の取得

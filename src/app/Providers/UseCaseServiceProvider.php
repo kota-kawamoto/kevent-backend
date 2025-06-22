@@ -21,6 +21,11 @@ class UseCaseServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            \packages\UseCase\Interfaces\Users\EditUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\EditUserInteractor::class
+        );
+
+        $this->app->bind(
             \packages\UseCase\Interfaces\Users\IndexUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\IndexUserInteractor::class
         );
