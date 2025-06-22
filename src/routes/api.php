@@ -6,6 +6,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use packages\Controllers\Controllers\Users\FindUserController;
 use packages\Controllers\Controllers\Users\EditUserController;
+use packages\Controllers\Controllers\Users\UpdateUserController;
 use Illuminate\Http\Request;
 
 // 認証不要のルート
@@ -28,7 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // グループ一覧の取得
     Route::get('/groups', [GroupController::class, 'getGroups']);
     // ユーザ情報の更新
-    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::put('/users/{id}', UpdateUserController::class);
     // ユーザ情報の作成
     Route::post('/users', [UserController::class, 'create']);
 });
