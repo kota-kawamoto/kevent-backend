@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
+use packages\Domain\Models\Enums\UserRoleType;
+use packages\Domain\Models\Enums\Group;
 
 class User extends Authenticatable
 {
@@ -50,6 +52,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'type_id'           => UserRoleType::class,
+            'group_id'          => Group::class,
         ];
     }
 }
