@@ -6,7 +6,6 @@ namespace packages\Controllers\Controllers\Users;
 use Illuminate\Http\JsonResponse;
 use packages\Presenter\Resources\Users\FindUserResource;
 use packages\UseCase\Interfaces\Users\FindUserUseCaseInterface;
-use Illuminate\Support\Facades\Log;
 
 /**
  * ユーザ詳細 Controller クラス
@@ -22,7 +21,6 @@ class FindUserController
      */
     public function __invoke(int $id): JsonResponse
     {
-        Log::info('FindUserController invoked', ['id' => $id]);
         return response()->json(
             new FindUserResource($this->useCase->handle($id))
         );
