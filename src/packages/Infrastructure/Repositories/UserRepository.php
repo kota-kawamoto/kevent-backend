@@ -83,4 +83,19 @@ class UserRepository implements UserRepositoryInterface
 
         $user->update($data);
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        $user = User::query()->find($id);
+
+        if (empty($user)) {
+            throw new NotFoundException('該当するユーザーが存在しません');
+        }
+
+        $user->delete();
+    }
 }

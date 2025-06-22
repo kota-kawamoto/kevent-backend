@@ -16,6 +16,11 @@ class UseCaseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
+            \packages\UseCase\Interfaces\Users\IndexUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\IndexUserInteractor::class
+        );
+
+        $this->app->bind(
             \packages\UseCase\Interfaces\Users\FindUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\FindUserInteractor::class
         );
@@ -26,13 +31,13 @@ class UseCaseServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \packages\UseCase\Interfaces\Users\IndexUserUseCaseInterface::class,
-            \packages\UseCase\Interactors\Users\IndexUserInteractor::class
+            \packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\UpdateUserInteractor::class
         );
 
         $this->app->bind(
-            \packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface::class,
-            \packages\UseCase\Interactors\Users\UpdateUserInteractor::class
+            \packages\UseCase\Interfaces\Users\DeleteUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\DeleteUserInteractor::class
         );
     }
 
