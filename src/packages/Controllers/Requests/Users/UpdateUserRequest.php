@@ -36,6 +36,7 @@ class UpdateUserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->route('id')),
             ],
             'group_id'  => ['required', 'integer', Rule::in(Group::values())],
+            'password' => 'nullable|string|min:4',
         ];
     }
 
