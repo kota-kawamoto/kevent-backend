@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use packages\Domain\Models\Enums\Group;
+use packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface;
+use packages\Presenter\Resources\Groups\GroupResource;
 
 class GroupController extends Controller
 {
+    public function __construct(private GetGroupsUseCaseInterface $useCase) {}
+
     /**
      * グループ情報を全て取得
      *
@@ -14,13 +17,7 @@ class GroupController extends Controller
      */
     public function getGroups(): JsonResponse
     {
-        $groups = [];
-        foreach (Group::cases() as $group) {
-            $groups[] = [
-                'id' => $group->value,
-                'name' => $group->label(),
-            ];
-        }
-        return response()->json($groups);
+        $groups = $this->useCase->handle();
+        return response()->json(GroupResource::collection($groups));
     }
 }

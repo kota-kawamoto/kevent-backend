@@ -34,6 +34,11 @@ class UseCaseServiceProvider extends ServiceProvider
             \packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\UpdateUserInteractor::class
         );
+
+        $this->app->bind(
+            \packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface::class,
+            \packages\Usecase\Interactors\Groups\GetGroupsInteractor::class
+        );
     }
 
     /**
