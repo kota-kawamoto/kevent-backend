@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
+use packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface;
+use packages\Presenter\Resources\Groups\GroupResource;
 
 class GroupController extends Controller
 {
+    public function __construct(private GetGroupsUseCaseInterface $useCase) {}
 
     /**
      * グループ情報を全て取得
@@ -16,15 +17,7 @@ class GroupController extends Controller
      */
     public function getGroups(): JsonResponse
     {
-        try {
-            $groups = Group::all();
-            return response()->json($groups);
-        } catch (\Exception $e) {
-            Log::error('Error', ['error' => $e->getMessage()]);
-            return response()->json(['error' => 'group not found'], 404);
-        }
+        $groups = $this->useCase->handle();
+        return response()->json(GroupResource::collection($groups));
     }
-
-
-
 }
