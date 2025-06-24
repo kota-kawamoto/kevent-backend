@@ -22,8 +22,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     // ユーザ情報の取得
     Route::get('/users/{id}', FindUserController::class);
-    // ユーザー編集画面用データ取得
-    Route::get('/users/{id}/edit', EditUserController::class);
     // ユーザ情報の削除
     Route::delete('/users/{id}', [UserController::class, 'delete']);
     // グループ一覧の取得
