@@ -25,6 +25,12 @@ interface UserRepositoryInterface
     public function update(int $id, array $data): void;
 
     /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id): void;
+
+    /**
      * @param array $params
      * @return UserPagination
      */
