@@ -26,7 +26,7 @@ class FindUserResource extends JsonResource
     {
         return [
             'id'       => $this->resource->getId(),
-            'name'     => $this->resource->getUserName(),
+            'name'     => $this->resource->getName(),
             'login_id' => $this->resource->getLoginId(),
             'group_id' => $this->resource->getGroupId(),
             'group_name' => $this->resource->getGroupName(),

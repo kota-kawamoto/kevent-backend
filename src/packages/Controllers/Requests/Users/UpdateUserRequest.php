@@ -5,6 +5,7 @@ namespace packages\Controllers\Requests\Users;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use packages\Domain\Models\Enums\Group;
+use packages\Domain\Models\Enums\UserRoleType;
 
 /**
  * ユーザ更新 FormRequest クラス
@@ -36,6 +37,7 @@ class UpdateUserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->route('id')),
             ],
             'group_id'  => ['required', 'integer', Rule::in(Group::values())],
+            'role_type' => ['nullable', 'integer', Rule::in(UserRoleType::values())],
         ];
     }
 

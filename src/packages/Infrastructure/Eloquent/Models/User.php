@@ -66,6 +66,7 @@ class User extends Authenticatable
             $this->name,
             $this->login_id,
             $this->group_id,
+            $this->type_id,
         );
     }
 }

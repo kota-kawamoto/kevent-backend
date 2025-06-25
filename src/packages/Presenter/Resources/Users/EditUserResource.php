@@ -29,7 +29,7 @@ class EditUserResource extends JsonResource
         return [
             'user' => [
                 'id'       => $user->getId(),
-                'name'     => $user->getUserName(),
+                'name'     => $user->getName(),
                 'login_id' => $user->getLoginId(),
                 'group_id' => $user->getGroupId(),
                 'group_name' => $user->getGroupName(),

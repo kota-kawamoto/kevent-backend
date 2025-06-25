@@ -12,6 +12,12 @@ use packages\Domain\Models\User;
 interface UserRepositoryInterface
 {
     /**
+     * @param array $params
+     * @return UserPagination
+     */
+    public function index(array $params): UserPagination;
+
+    /**
      * @param int $id
      * @return User
      */
@@ -29,10 +35,4 @@ interface UserRepositoryInterface
      * @return void
      */
     public function delete(int $id): void;
-
-    /**
-     * @param array $params
-     * @return UserPagination
-     */
-    public function index(array $params): UserPagination;
 }
