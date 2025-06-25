@@ -3,6 +3,8 @@
 namespace packages\Controllers\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use packages\Domain\Models\Enums\UserRoleType;
 
 /**
  * ユーザ一覧 FormRequest クラス
@@ -28,7 +30,7 @@ class IndexUserRequest extends FormRequest
         return [
             'name'      => 'nullable|string|max:255',
             'login_id'  => 'nullable|string|max:255',
-            'role_type' => 'nullable|integer|in:1,2',
+            'role_type' => ['nullable' , Rule::enum(UserRoleType::class)],
             'page'      => 'nullable|integer|min:1',
         ];
     }
