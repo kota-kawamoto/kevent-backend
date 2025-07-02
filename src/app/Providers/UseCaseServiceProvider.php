@@ -16,18 +16,33 @@ class UseCaseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \packages\UseCase\Interfaces\Users\FindUserUseCaseInterface::class,
-            \packages\UseCase\Interactors\Users\FindUserInteractor::class
-        );
-
-        $this->app->bind(
             \packages\UseCase\Interfaces\Users\IndexUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\IndexUserInteractor::class
         );
 
         $this->app->bind(
+            \packages\UseCase\Interfaces\Users\FindUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\FindUserInteractor::class
+        );
+
+        $this->app->bind(
+            \packages\UseCase\Interfaces\Users\EditUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\EditUserInteractor::class
+        );
+
+        $this->app->bind(
             \packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\UpdateUserInteractor::class
+        );
+
+        $this->app->bind(
+            \packages\UseCase\Interfaces\Users\DeleteUserUseCaseInterface::class,
+            \packages\UseCase\Interactors\Users\DeleteUserInteractor::class
+        );
+
+        $this->app->bind(
+            \packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface::class,
+            \packages\Usecase\Interactors\Groups\GetGroupsInteractor::class
         );
     }
 
