@@ -4,7 +4,7 @@ namespace packages\Presenter\Resources\Groups;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GroupResource extends JsonResource
+class GetGroupResource extends JsonResource
 {
     public function toArray($request): array
     {

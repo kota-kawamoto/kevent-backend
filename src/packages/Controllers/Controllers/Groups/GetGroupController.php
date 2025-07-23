@@ -4,7 +4,7 @@ namespace packages\Controllers\Controllers\Groups;
 
 use Illuminate\Http\JsonResponse;
 use packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface;
-use packages\Presenter\Resources\Groups\GroupResource;
+use packages\Presenter\Resources\Groups\GetGroupResource;
 
 class GetGroupController
 {
@@ -18,6 +18,6 @@ class GetGroupController
     public function __invoke(): JsonResponse
     {
         $groups = $this->useCase->handle();
-        return response()->json(GroupResource::collection($groups));
+        return response()->json(GetGroupResource::collection($groups));
     }
 }

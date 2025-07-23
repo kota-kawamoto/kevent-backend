@@ -2,7 +2,7 @@
 
 namespace packages\Controllers\Controllers\Users;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use packages\Controllers\Requests\Users\UpdateUserRequest;
 use packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface;
 
@@ -17,11 +17,11 @@ class UpdateUserController
     /**
      * @param UpdateUserRequest $request
      * @param integer $id
-     * @return JsonResponse
+     * @return Response
      */
-    public function __invoke(UpdateUserRequest $request, int $id): JsonResponse
+    public function __invoke(UpdateUserRequest $request, int $id): Response
     {
         $this->useCase->handle($id, $request->validated());
-        return response()->json(['message' => 'ユーザー情報を更新しました'], 200);
+        return response()->noContent();
     }
 }

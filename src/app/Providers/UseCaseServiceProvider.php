@@ -26,11 +26,6 @@ class UseCaseServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \packages\UseCase\Interfaces\Users\EditUserUseCaseInterface::class,
-            \packages\UseCase\Interactors\Users\EditUserInteractor::class
-        );
-
-        $this->app->bind(
             \packages\UseCase\Interfaces\Users\UpdateUserUseCaseInterface::class,
             \packages\UseCase\Interactors\Users\UpdateUserInteractor::class
         );
