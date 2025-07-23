@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace packages\Controllers\Controllers\Groups;
 
 use Illuminate\Http\JsonResponse;
 use packages\Usecase\Interfaces\Groups\GetGroupsUseCaseInterface;
 use packages\Presenter\Resources\Groups\GroupResource;
 
-class GroupController extends Controller
+class GetGroupController
 {
     public function __construct(private GetGroupsUseCaseInterface $useCase) {}
 
@@ -15,7 +15,7 @@ class GroupController extends Controller
      *
      * @return JsonResponse
      */
-    public function getGroups(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         $groups = $this->useCase->handle();
         return response()->json(GroupResource::collection($groups));
