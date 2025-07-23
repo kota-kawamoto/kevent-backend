@@ -38,6 +38,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'group_id'  => ['required', 'integer', Rule::in(Group::values())],
             'role_type' => ['nullable', 'integer', Rule::in(UserRoleType::values())],
+            'password' => 'nullable|string|min:4',
         ];
     }
 
